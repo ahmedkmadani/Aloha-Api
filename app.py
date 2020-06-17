@@ -111,7 +111,7 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
 
-    return user_schema.jsonify(user)
+)
 
 
 if __name__ == '__main__':
