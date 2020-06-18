@@ -58,16 +58,16 @@ def user_list():
 
 @app.route('/user/', methods=['POST'])
 def create_user():
-    UserName = request.form['UserName']
-    Email = request.form['Email']
-    Password = bcrypt.generate_password_hash(request.form['Password'])
-    PhoneNumber = request.form['PhoneNumber']
-    CompanyName = request.form['CompanyName']
-    JobTitle = request.form['JobTitle']
-    Twitter = request.form['Twitter']
-    Linkdin = request.form['Linkdin']
+    # UserName = request.args.get('UserName')
+    Email = request.args.get('Email')
+    Password = request.args.get('Password')
+    PhoneNumber = request.args.get('PhoneNumber')
+    CompanyName = request.args.get('CompanyName')
+    JobTitle = request.args.get('JobTitle')
+    Twitter = request.args.get('Twitter')
+    Linkdin = request.args.get('Linkdin')
 
-    user = User(UserName = UserName, Email = Email, Password = Password, PhoneNumber = PhoneNumber, CompanyName = CompanyName, 
+    user = User(UserName = request.args.get('UserName'), Email = Email, Password = Password, PhoneNumber = PhoneNumber, CompanyName = CompanyName, 
     JobTitle = JobTitle, Twitter = Twitter, Linkdin = Linkdin)
     
     db.session.add(user)
