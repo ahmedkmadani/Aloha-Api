@@ -56,7 +56,19 @@ def user_list():
     return jsonify(users_schema.dump(all_user))
 
 
-@app.route('/user/', methods=['POST'])
+
+@app.route('/login/', methods=['GET'])
+def login_user():
+    user = User.query.filter_by(Email = request.args.get('Email')).first()
+    print(user)
+    if user and bcrypt.check_password_hash(user.Password, request.args.get('Password')):
+        return user_schema.jsonify(user)
+    else :
+        return jsonify({"result" : "failure", "response code" : "404", "message" : "Internal server error"}), 404
+
+
+
+@app.route('/register/', methods=['POST'])
 def create_user():
     UserName = request.args.get('UserName')
     Email = request.args.get('Email')
@@ -67,7 +79,7 @@ def create_user():
     Twitter = request.args.get('Twitter')
     Linkdin = request.args.get('Linkdin')
 
-    user = User(UserName = request.args.get('UserName'), Email = Email, Password = Password, PhoneNumber = PhoneNumber, CompanyName = CompanyName, 
+    user = User(UserName = request.args.get('UserName'), Email = Email, Password = bcrypt.generate_password_hash(Password), PhoneNumber = PhoneNumber, CompanyName = CompanyName, 
     JobTitle = JobTitle, Twitter = Twitter, Linkdin = Linkdin)
     
     db.session.add(user)
