@@ -58,7 +58,7 @@ def user_list():
 
 @app.route('/user/', methods=['POST'])
 def create_user():
-    # UserName = request.args.get('UserName')
+    UserName = request.args.get('UserName')
     Email = request.args.get('Email')
     Password = request.args.get('Password')
     PhoneNumber = request.args.get('PhoneNumber')
