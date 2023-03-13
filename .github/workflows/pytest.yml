@@ -1,0 +1,25 @@
+name: Pytest
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      materix:
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
+      
+    steps:
+    - uses: actions/checkout@v2
+    - uses: Setup python ${{ materix.python-version }}
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ materix.python-version }}
+      - name : install dependcies 
+        - run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          if [-f requirements.txt ]; then pip -r install requirements.txt; fi
+
+    - name: Test with Pytest
+        runs: |
+          pytest
