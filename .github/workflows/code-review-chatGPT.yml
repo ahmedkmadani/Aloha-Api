@@ -1,19 +1,18 @@
-name: Code Review with ChatGPT
+name: Code Review
 
 permissions:
   contents: read
   pull-requests: write
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
-  docker:
+  test:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Review with ChatGPT
-        uses: anc95/ChatGPT-CodeReview@main
+      - uses: anc95/ChatGPT-CodeReview@main
         env:
-          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
