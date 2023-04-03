@@ -1,0 +1,19 @@
+name: Code Review with ChatGPT
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on: [push, pull_request]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Review with ChatGPT
+        uses: anc95/ChatGPT-CodeReview@main
+        env:
+          GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
+          OPEN_API_KEY: ${{ secret.OPEN_API_KEY }}
+

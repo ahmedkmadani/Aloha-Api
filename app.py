@@ -81,10 +81,10 @@ def create_user():
 
     user = User(UserName = request.args.get('UserName'), Email = Email, Password = bcrypt.generate_password_hash(Password), PhoneNumber = PhoneNumber, CompanyName = CompanyName, 
     JobTitle = JobTitle, Twitter = Twitter, Linkdin = Linkdin)
-    
+
     db.session.add(user)
     db.session.commit()
-    
+
     return user_schema.jsonify(user)
 
 
@@ -106,7 +106,7 @@ def update_(user_id):
     Linkdin = request.form['Linkdin']
 
     user = User.query.get(user_id)
-    
+
     user.UserName = UserName
     user.Email = Email
     user.Password = Password
@@ -125,7 +125,7 @@ def update_(user_id):
 @app.route('/user/<int:user_id>/', methods=["DELETE"])
 def delete_note(user_id):
     user = User.query.get(user_id)
-    
+
     db.session.delete(user)
     db.session.commit()
 
