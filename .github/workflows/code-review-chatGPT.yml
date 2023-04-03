@@ -14,6 +14,6 @@ jobs:
         name: Review with ChatGPT
         uses: anc95/ChatGPT-CodeReview@main
         env:
-          TOKEN: ${{ secrets.TOKEN }}
-          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPEN_API_KEY: ${{ secrets.GITHUB_TOKEN }}
 
